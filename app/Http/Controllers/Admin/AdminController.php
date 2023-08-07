@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Artikel;
 
 class AdminController extends Controller
 {
@@ -20,9 +21,31 @@ class AdminController extends Controller
             if(Auth::guard('admin')->attempt(['email'=>$data['email'], 'password'=>$data['password']])){
                 return redirect("admin/dashboard");
             }else{
-                return redirect()->back()->with("error_massage","Whoops! Invalid Email or Password");
+                return redirect()->back()->with("error","Whoops! Invalid Email or Password");
             }
         }
         return view('Admin.Auth.login');
+    }
+
+
+
+    // ROUTES
+    public function artikel()
+    {
+        $artikel = Artikel::paginate(5);
+
+        return view('Admin.Artikel.artikel');
+    }
+    public function gallery()
+    {
+        return view('Admin.CRUD.gallery');
+    }
+    public function video()
+    {
+        return view('Admin.CRUD.video');
+    }
+    public function infografis()
+    {
+        return view('Admin.CRUD.infografis');
     }
 }

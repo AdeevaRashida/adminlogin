@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +15,16 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::prefix('/admin')->namespace('app\Http\Controllers\Admin')->group(function(){
     Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
     Route::group(['middleware'=>['admin']], function(){
         Route::get('dashboard', [AdminController::class, 'dashboard']);
     });
+    Route::get('/artikel', [AdminController::class, 'artikel'])->name('artikel');
+    Route::get('/gallery', [AdminController::class, 'gallery'])->name('gallery');
+    Route::get('/video', [AdminController::class, 'video'])->name('video');
+    Route::get('/infografis', [AdminController::class, 'infografis'])->name('infografis');
+    
+    Route::get('artikel-create', [ArtikelController::class, 'create'])->name('create');
+    Route::post('artikel-store', [ArtikelController::class, 'store'])->name('store');
 });
