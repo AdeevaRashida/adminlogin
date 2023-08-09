@@ -24,7 +24,15 @@ Route::prefix('/admin')->namespace('app\Http\Controllers\Admin')->group(function
     Route::get('/gallery', [AdminController::class, 'gallery'])->name('gallery');
     Route::get('/video', [AdminController::class, 'video'])->name('video');
     Route::get('/infografis', [AdminController::class, 'infografis'])->name('infografis');
-    
+
     Route::get('artikel-create', [ArtikelController::class, 'create'])->name('create');
     Route::post('artikel-store', [ArtikelController::class, 'store'])->name('store');
 });
+
+Route::prefix('/edit')->namespace('app\Http\Controllers')->group(function(){
+    Route::get('{id}', [ArtikelController::class, 'edit'])->name('edit');
+    Route::put('{id}', [ArtikelController::class, 'update'])->name('update');
+});
+
+Route::delete('/{id}', [ArtikelController::class, 'destroy'])->name('destroy');
+

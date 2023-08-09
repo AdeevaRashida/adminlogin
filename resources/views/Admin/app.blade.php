@@ -12,7 +12,7 @@
     <link href="{{ asset('/assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,6 +31,7 @@
         </div>
     </div>
     
+    {{-- LOGOUT MODAL --}}
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -48,6 +49,31 @@
           </div>
         </div>
     </div>
+
+    {{-- DELETE MODAL --}}
+    {{-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="{{ route('destroy',$artikel->id) }}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">DELETION</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda Yakin Ingin Menghapus?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div> --}}
+
+    {{-- MAIN --}}
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
@@ -56,7 +82,7 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-lg-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
                     <div class="navbar-brand">
-                        <a href="index.html">
+                        <a href="{{ url('admin/dashboard') }}">
                             <img src="../assets/images/logo_balmon.png" alt="" class="img-fluid">
                         </a>
                     </div>
@@ -253,6 +279,7 @@
     
     </div>
 <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="../dist/js/app-style-switcher.js"></script>

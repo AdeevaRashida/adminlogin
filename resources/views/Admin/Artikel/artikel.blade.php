@@ -26,31 +26,57 @@
 
         <div class="row">
             <div class="col-12">
+                @if( Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert-body">
+                    {{ Session::get('success') }}
+                    </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+                {{ Session::forget('success') }}
+                @if(Session::get('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert-body">
+                        {{ Session::get('error') }}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="myTable" class="table border table-striped table-bordered text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
                                         <th>ID</th>
                                         <th>Image</th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Isi</th>
                                         <th>Tanggal</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 @foreach ($artikel as $item)
                                 <tbody>
                                     <tr>
-                                        <td>{{ ++$i }}</td>
-                                        <td>{{ $item->id_artikel }}</td>
-                                        <td><img src="/images/image/{{ $item->image }}" width="100px"></td>
+                                        {{-- <td>{{ ++$i }}</td> --}}
+                                        <td>{{ $item->id }}</td>
+                                        <td><img src="/images/{{ $item->image }}" width="100px"></td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->description }}</td>
                                         <td>{{ $item->isi }}</td>
                                         <td>{{ $item->tanggal }}</td>
+                                        <td>
+                                            <form action="{{ route('destroy',$item->id) }}" method="POST" style="display: flex; justify-content:center">
+                                                <a class="btn btn-primary" href="{{ route('edit', $item->id) }}">Edit</a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" style="width: 100px; height: 40px; filter: drop-shadow(0px 4px 20px rgba(255, 255, 255, 0));"
+                                                >Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 @endforeach
@@ -515,13 +541,13 @@
                                 </tbody> --}}
                                 <tfoot>
                                     <tr>
-                                        <th>No.</th>
                                         <th>ID</th>
                                         <th>Image</th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Isi</th>
                                         <th>Tanggal</th>
+                                        <th>Action</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -537,7 +563,7 @@
 
 <script>
     new DataTable('#myTable', {
-    order: [[1, 'desc']]
+    order: [[3, 'desc']]
     });
 </script>
 

@@ -34,7 +34,7 @@ class AdminController extends Controller
     {
         $artikel = Artikel::paginate(5);
 
-        return view('Admin.Artikel.artikel');
+        return view('Admin.Artikel.artikel', compact('artikel'));
     }
     public function gallery()
     {
